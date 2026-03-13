@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/google-cloud-storage/refs/heads/main/json-schema/bucket-schema.json",
+  "title": "Google Cloud Storage Bucket",
+  "description": "A Cloud Storage bucket resource representing a container for objects stored in Google Cloud Storage.",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "storage#bucket",
+      "description": "The kind of item this is. Always storage#bucket."
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID of the bucket."
+    },
+    "selfLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URI of this bucket."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the bucket.",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[a-z0-9][a-z0-9._-]*[a-z0-9]$"
+    },
+    "projectNumber": {
+      "type": "string",
+      "description": "The project number of the project the bucket belongs to."
+    },
+    "timeCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The creation time of the bucket in RFC 3339 format."
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The modification time of the bucket in RFC 3339 format."
+    },
+    "location": {
+      "type": "string",
+      "description": "The location of the bucket (e.g., US, EU, us-central1)."
+    },
+    "locationType": {
+      "type": "string",
+      "enum": ["region", "dual-region", "multi-region"],
+      "description": "The type of the bucket location."
+    },
+    "storageClass": {
+      "type": "string",
+      "enum": ["STANDARD", "NEARLINE", "COLDLINE", "ARCHIVE"],
+      "description": "The default storage class of the bucket."
+    },
+    "versioning": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether versioning is enabled for the bucket."
+        }
+      }
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "User-provided labels in key/value pairs."
+    },
+    "lifecycle": {
+      "type": "object",
+      "properties": {
+        "rule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["Delete", "SetStorageClass", "AbortIncompleteMultipartUpload"]
+                  },
+                  "storageClass": {
+                    "type": "string"
+                  }
+                },
+                "required": ["type"]
+              },
+              "condition": {
+                "type": "object",
+                "properties": {
+                  "age": { "type": "integer" },
+                  "isLive": { "type": "boolean" },
+                  "numNewerVersions": { "type": "integer" },
+                  "createdBefore": { "type": "string", "format": "date" },
+                  "matchesStorageClass": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "The bucket's lifecycle configuration."
+    },
+    "encryption": {
+      "type": "object",
+      "properties": {
+        "defaultKmsKeyName": {
+          "type": "string",
+          "description": "Cloud KMS key name for default bucket encryption."
+        }
+      }
+    },
+    "iamConfiguration": {
+      "type": "object",
+      "properties": {
+        "uniformBucketLevelAccess": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "lockedTime": { "type": "string", "format": "date-time" }
+          }
+        },
+        "publicAccessPrevention": {
+          "type": "string",
+          "enum": ["inherited", "enforced"]
+        }
+      }
+    },
+    "metageneration": {
+      "type": "string",
+      "description": "The metadata generation of this bucket."
+    },
+    "etag": {
+      "type": "string",
+      "description": "HTTP 1.1 Entity tag for the bucket."
+    }
+  },
+  "required": ["name"]
+}

@@ -1,0 +1,546 @@
+openapi: 3.1.0
+info:
+  title: Google Cloud Storage JSON API
+  description: >-
+    The Google Cloud Storage JSON API allows applications to store and retrieve
+    data on Google's infrastructure. It provides RESTful access to Cloud Storage
+    buckets and objects, supporting upload, download, metadata management, and
+    access control operations.
+  version: v1
+  contact:
+    name: Google Cloud
+    url: https://cloud.google.com/storage/docs/json_api
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: https://storage.googleapis.com/storage/v1
+    description: Google Cloud Storage JSON API v1
+tags:
+  - name: Buckets
+    description: Operations on Cloud Storage buckets
+  - name: Objects
+    description: Operations on Cloud Storage objects
+  - name: BucketAccessControls
+    description: Access controls for buckets
+paths:
+  /b:
+    get:
+      tags:
+        - Buckets
+      summary: List buckets
+      description: Retrieves a list of buckets for a given project.
+      operationId: listBuckets
+      parameters:
+        - name: project
+          in: query
+          required: true
+          description: A valid API project identifier.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          description: Maximum number of buckets to return.
+          schema:
+            type: integer
+        - name: pageToken
+          in: query
+          description: A previously-returned page token for pagination.
+          schema:
+            type: string
+        - name: prefix
+          in: query
+          description: Filter results to buckets whose names begin with this prefix.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketList'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.read_only
+    post:
+      tags:
+        - Buckets
+      summary: Create a bucket
+      description: Creates a new bucket in the specified project.
+      operationId: insertBucket
+      parameters:
+        - name: project
+          in: query
+          required: true
+          description: A valid API project identifier.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bucket'
+      responses:
+        '200':
+          description: Bucket created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bucket'
+        '400':
+          description: Bad request
+        '409':
+          description: Conflict - bucket already exists
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.read_write
+  /b/{bucket}:
+    get:
+      tags:
+        - Buckets
+      summary: Get a bucket
+      description: Returns metadata for the specified bucket.
+      operationId: getBucket
+      parameters:
+        - name: bucket
+          in: path
+          required: true
+          description: Name of the bucket.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bucket'
+        '404':
+          description: Not found
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.read_only
+    put:
+      tags:
+        - Buckets
+      summary: Update a bucket
+      description: Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.
+      operationId: updateBucket
+      parameters:
+        - name: bucket
+          in: path
+          required: true
+          description: Name of the bucket.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bucket'
+      responses:
+        '200':
+          description: Bucket updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bucket'
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.full_control
+    delete:
+      tags:
+        - Buckets
+      summary: Delete a bucket
+      description: Permanently deletes an empty bucket.
+      operationId: deleteBucket
+      parameters:
+        - name: bucket
+          in: path
+          required: true
+          description: Name of the bucket.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Bucket deleted successfully
+        '404':
+          description: Not found
+        '409':
+          description: Conflict - bucket is not empty
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.full_control
+  /b/{bucket}/o:
+    get:
+      tags:
+        - Objects
+      summary: List objects
+      description: Retrieves a list of objects matching the criteria in the specified bucket.
+      operationId: listObjects
+      parameters:
+        - name: bucket
+          in: path
+          required: true
+          description: Name of the bucket.
+          schema:
+            type: string
+        - name: prefix
+          in: query
+          description: Filter results to objects whose names begin with this prefix.
+          schema:
+            type: string
+        - name: delimiter
+          in: query
+          description: Returns results in a directory-like mode.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          description: Maximum number of objects to return.
+          schema:
+            type: integer
+        - name: pageToken
+          in: query
+          description: A previously-returned page token for pagination.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectList'
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.read_only
+    post:
+      tags:
+        - Objects
+      summary: Insert an object
+      description: Stores a new object and metadata. For tips on uploading to Cloud Storage, see best practices.
+      operationId: insertObject
+      parameters:
+        - name: bucket
+          in: path
+          required: true
+          description: Name of the bucket.
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Name of the object.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Object created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.read_write
+  /b/{bucket}/o/{object}:
+    get:
+      tags:
+        - Objects
+      summary: Get an object
+      description: Retrieves an object or its metadata.
+      operationId: getObject
+      parameters:
+        - name: bucket
+          in: path
+          required: true
+          description: Name of the bucket.
+          schema:
+            type: string
+        - name: object
+          in: path
+          required: true
+          description: Name of the object.
+          schema:
+            type: string
+        - name: alt
+          in: query
+          description: Set to media to download object data. Default is json for metadata.
+          schema:
+            type: string
+            enum:
+              - json
+              - media
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '404':
+          description: Not found
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.read_only
+    put:
+      tags:
+        - Objects
+      summary: Update an object
+      description: Updates an object's metadata.
+      operationId: updateObject
+      parameters:
+        - name: bucket
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: object
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Object'
+      responses:
+        '200':
+          description: Object updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.full_control
+    delete:
+      tags:
+        - Objects
+      summary: Delete an object
+      description: Deletes an object and its metadata. Deletions are permanent if versioning is not enabled.
+      operationId: deleteObject
+      parameters:
+        - name: bucket
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: object
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Object deleted successfully
+        '404':
+          description: Not found
+      security:
+        - oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+            - https://www.googleapis.com/auth/devstorage.full_control
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: Full access to Cloud Platform
+            https://www.googleapis.com/auth/devstorage.full_control: Full control of Cloud Storage
+            https://www.googleapis.com/auth/devstorage.read_only: Read-only access to Cloud Storage
+            https://www.googleapis.com/auth/devstorage.read_write: Read-write access to Cloud Storage
+  schemas:
+    Bucket:
+      type: object
+      properties:
+        kind:
+          type: string
+          default: storage#bucket
+          description: The kind of item this is. Always storage#bucket.
+        id:
+          type: string
+          description: The ID of the bucket.
+        selfLink:
+          type: string
+          description: The URI of this bucket.
+        name:
+          type: string
+          description: The name of the bucket.
+        projectNumber:
+          type: string
+          description: The project number of the project the bucket belongs to.
+        timeCreated:
+          type: string
+          format: date-time
+          description: The creation time of the bucket.
+        updated:
+          type: string
+          format: date-time
+          description: The modification time of the bucket.
+        location:
+          type: string
+          description: The location of the bucket.
+        locationType:
+          type: string
+          description: The type of location (region, dual-region, multi-region).
+        storageClass:
+          type: string
+          description: The default storage class of the bucket.
+          enum:
+            - STANDARD
+            - NEARLINE
+            - COLDLINE
+            - ARCHIVE
+        versioning:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+          description: The bucket's versioning configuration.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: User-provided labels.
+        lifecycle:
+          type: object
+          properties:
+            rule:
+              type: array
+              items:
+                type: object
+                properties:
+                  action:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      storageClass:
+                        type: string
+                  condition:
+                    type: object
+                    properties:
+                      age:
+                        type: integer
+                      isLive:
+                        type: boolean
+                      numNewerVersions:
+                        type: integer
+          description: The bucket's lifecycle configuration.
+        encryption:
+          type: object
+          properties:
+            defaultKmsKeyName:
+              type: string
+          description: Encryption configuration for a bucket.
+        iamConfiguration:
+          type: object
+          properties:
+            uniformBucketLevelAccess:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                lockedTime:
+                  type: string
+                  format: date-time
+    BucketList:
+      type: object
+      properties:
+        kind:
+          type: string
+          default: storage#buckets
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bucket'
+        nextPageToken:
+          type: string
+    Object:
+      type: object
+      properties:
+        kind:
+          type: string
+          default: storage#object
+        id:
+          type: string
+        selfLink:
+          type: string
+        name:
+          type: string
+          description: The name of the object.
+        bucket:
+          type: string
+          description: The name of the bucket containing the object.
+        generation:
+          type: string
+        metageneration:
+          type: string
+        contentType:
+          type: string
+          description: Content-Type of the object data.
+        timeCreated:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        size:
+          type: string
+          description: Content-Length of the data in bytes.
+        md5Hash:
+          type: string
+        crc32c:
+          type: string
+        etag:
+          type: string
+        storageClass:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    ObjectList:
+      type: object
+      properties:
+        kind:
+          type: string
+          default: storage#objects
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Object'
+        prefixes:
+          type: array
+          items:
+            type: string
+        nextPageToken:
+          type: string

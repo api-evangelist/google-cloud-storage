@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "gcs": "https://cloud.google.com/storage/docs/json_api/v1/",
+    "gcloud": "https://cloud.google.com/apis/",
+    "Bucket": "gcs:buckets",
+    "Object": "gcs:objects",
+    "BucketAccessControl": "gcs:bucketAccessControls",
+    "ObjectAccessControl": "gcs:objectAccessControls",
+    "name": "schema:name",
+    "description": "schema:description",
+    "dateCreated": "schema:dateCreated",
+    "dateModified": "schema:dateModified",
+    "contentType": "schema:encodingFormat",
+    "contentSize": "schema:contentSize",
+    "location": "schema:location",
+    "storageClass": "gcs:storageClass",
+    "selfLink": "schema:url",
+    "labels": "schema:keywords",
+    "encryption": "gcs:encryption",
+    "versioning": "gcs:versioning",
+    "lifecycle": "gcs:lifecycle",
+    "project": "gcloud:project",
+    "iamConfiguration": "gcs:iamConfiguration"
+  }
+}
