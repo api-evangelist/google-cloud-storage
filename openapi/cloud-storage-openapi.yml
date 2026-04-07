@@ -21,8 +21,6 @@ tags:
     description: Operations on Cloud Storage buckets
   - name: Objects
     description: Operations on Cloud Storage objects
-  - name: BucketAccessControls
-    description: Access controls for buckets
 paths:
   /b:
     get:

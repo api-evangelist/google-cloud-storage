@@ -13,11 +13,11 @@ modified: '2026-03-16'
 specificationVersion: '0.19'
 type: Index
 tags:
-  - Storage
-  - Objects
   - Buckets
   - Cloud
   - Google Cloud
+  - Objects
+  - Storage
 apis:
   - name: Cloud Storage JSON API
     description: >-
@@ -30,9 +30,9 @@ apis:
     humanURL: https://cloud.google.com/storage/docs
     baseURL: https://storage.googleapis.com/storage/v1
     tags:
-      - Storage
-      - Objects
       - Buckets
+      - Objects
+      - Storage
     properties:
       - type: Documentation
         url: https://cloud.google.com/storage/docs/json_api
