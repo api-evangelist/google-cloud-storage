@@ -28,7 +28,7 @@ paths:
     get:
       tags:
         - Buckets
-      summary: List buckets
+      summary: Google Cloud Storage List buckets
       description: Retrieves a list of buckets for a given project.
       operationId: listBuckets
       parameters:
@@ -71,7 +71,7 @@ paths:
     post:
       tags:
         - Buckets
-      summary: Create a bucket
+      summary: Google Cloud Storage Create a bucket
       description: Creates a new bucket in the specified project.
       operationId: insertBucket
       parameters:
@@ -106,7 +106,7 @@ paths:
     get:
       tags:
         - Buckets
-      summary: Get a bucket
+      summary: Google Cloud Storage Get a bucket
       description: Returns metadata for the specified bucket.
       operationId: getBucket
       parameters:
@@ -132,7 +132,7 @@ paths:
     put:
       tags:
         - Buckets
-      summary: Update a bucket
+      summary: Google Cloud Storage Update a bucket
       description: Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.
       operationId: updateBucket
       parameters:
@@ -162,7 +162,7 @@ paths:
     delete:
       tags:
         - Buckets
-      summary: Delete a bucket
+      summary: Google Cloud Storage Delete a bucket
       description: Permanently deletes an empty bucket.
       operationId: deleteBucket
       parameters:
@@ -187,7 +187,7 @@ paths:
     get:
       tags:
         - Objects
-      summary: List objects
+      summary: Google Cloud Storage List objects
       description: Retrieves a list of objects matching the criteria in the specified bucket.
       operationId: listObjects
       parameters:
@@ -231,7 +231,7 @@ paths:
     post:
       tags:
         - Objects
-      summary: Insert an object
+      summary: Google Cloud Storage Insert an object
       description: Stores a new object and metadata. For tips on uploading to Cloud Storage, see best practices.
       operationId: insertObject
       parameters:
@@ -267,7 +267,7 @@ paths:
     get:
       tags:
         - Objects
-      summary: Get an object
+      summary: Google Cloud Storage Get an object
       description: Retrieves an object or its metadata.
       operationId: getObject
       parameters:
@@ -307,7 +307,7 @@ paths:
     put:
       tags:
         - Objects
-      summary: Update an object
+      summary: Google Cloud Storage Update an object
       description: Updates an object's metadata.
       operationId: updateObject
       parameters:
@@ -341,7 +341,7 @@ paths:
     delete:
       tags:
         - Objects
-      summary: Delete an object
+      summary: Google Cloud Storage Delete an object
       description: Deletes an object and its metadata. Deletions are permanent if versioning is not enabled.
       operationId: deleteObject
       parameters:
