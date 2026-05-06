@@ -1,0 +1,578 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Cloud Storage JSON API
+  description: The Google Cloud Storage JSON API allows applications to store and retrieve data on Google's infrastructure.
+    It provides RESTful access to Cloud Storage buckets and objects, supporting upload, download, metadata management, and
+    access control operations.
+  tags:
+  - Google
+  - Cloud
+  - Storage
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: google-cloud-storage
+    baseUri: https://storage.googleapis.com/storage/v1
+    description: Google Cloud Storage JSON API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{GOOGLE_CLOUD_STORAGE_TOKEN}}'
+    resources:
+    - name: b
+      path: /b
+      operations:
+      - name: listbuckets
+        method: GET
+        description: Google Cloud Storage List buckets
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          required: true
+          description: A valid API project identifier.
+        - name: maxResults
+          in: query
+          type: integer
+          description: Maximum number of buckets to return.
+        - name: pageToken
+          in: query
+          type: string
+          description: A previously-returned page token for pagination.
+        - name: prefix
+          in: query
+          type: string
+          description: Filter results to buckets whose names begin with this prefix.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: insertbucket
+        method: POST
+        description: Google Cloud Storage Create a bucket
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          required: true
+          description: A valid API project identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: b-bucket
+      path: /b/{bucket}
+      operations:
+      - name: getbucket
+        method: GET
+        description: Google Cloud Storage Get a bucket
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+          description: Name of the bucket.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatebucket
+        method: PUT
+        description: Google Cloud Storage Update a bucket
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+          description: Name of the bucket.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletebucket
+        method: DELETE
+        description: Google Cloud Storage Delete a bucket
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+          description: Name of the bucket.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: b-bucket-o
+      path: /b/{bucket}/o
+      operations:
+      - name: listobjects
+        method: GET
+        description: Google Cloud Storage List objects
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+          description: Name of the bucket.
+        - name: prefix
+          in: query
+          type: string
+          description: Filter results to objects whose names begin with this prefix.
+        - name: delimiter
+          in: query
+          type: string
+          description: Returns results in a directory-like mode.
+        - name: maxResults
+          in: query
+          type: integer
+          description: Maximum number of objects to return.
+        - name: pageToken
+          in: query
+          type: string
+          description: A previously-returned page token for pagination.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: insertobject
+        method: POST
+        description: Google Cloud Storage Insert an object
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+          description: Name of the bucket.
+        - name: name
+          in: query
+          type: string
+          description: Name of the object.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: b-bucket-o-object
+      path: /b/{bucket}/o/{object}
+      operations:
+      - name: getobject
+        method: GET
+        description: Google Cloud Storage Get an object
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+          description: Name of the bucket.
+        - name: object
+          in: path
+          type: string
+          required: true
+          description: Name of the object.
+        - name: alt
+          in: query
+          type: string
+          description: Set to media to download object data. Default is json for metadata.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateobject
+        method: PUT
+        description: Google Cloud Storage Update an object
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+        - name: object
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteobject
+        method: DELETE
+        description: Google Cloud Storage Delete an object
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+        - name: object
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: google-cloud-storage-rest
+    description: REST adapter for Google Cloud Storage JSON API.
+    resources:
+    - path: /b
+      name: listbuckets
+      operations:
+      - method: GET
+        name: listbuckets
+        description: Google Cloud Storage List buckets
+        call: google-cloud-storage.listbuckets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /b
+      name: insertbucket
+      operations:
+      - method: POST
+        name: insertbucket
+        description: Google Cloud Storage Create a bucket
+        call: google-cloud-storage.insertbucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /b/{bucket}
+      name: getbucket
+      operations:
+      - method: GET
+        name: getbucket
+        description: Google Cloud Storage Get a bucket
+        call: google-cloud-storage.getbucket
+        with:
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /b/{bucket}
+      name: updatebucket
+      operations:
+      - method: PUT
+        name: updatebucket
+        description: Google Cloud Storage Update a bucket
+        call: google-cloud-storage.updatebucket
+        with:
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /b/{bucket}
+      name: deletebucket
+      operations:
+      - method: DELETE
+        name: deletebucket
+        description: Google Cloud Storage Delete a bucket
+        call: google-cloud-storage.deletebucket
+        with:
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /b/{bucket}/o
+      name: listobjects
+      operations:
+      - method: GET
+        name: listobjects
+        description: Google Cloud Storage List objects
+        call: google-cloud-storage.listobjects
+        with:
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /b/{bucket}/o
+      name: insertobject
+      operations:
+      - method: POST
+        name: insertobject
+        description: Google Cloud Storage Insert an object
+        call: google-cloud-storage.insertobject
+        with:
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /b/{bucket}/o/{object}
+      name: getobject
+      operations:
+      - method: GET
+        name: getobject
+        description: Google Cloud Storage Get an object
+        call: google-cloud-storage.getobject
+        with:
+          bucket: rest.bucket
+          object: rest.object
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /b/{bucket}/o/{object}
+      name: updateobject
+      operations:
+      - method: PUT
+        name: updateobject
+        description: Google Cloud Storage Update an object
+        call: google-cloud-storage.updateobject
+        with:
+          bucket: rest.bucket
+          object: rest.object
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /b/{bucket}/o/{object}
+      name: deleteobject
+      operations:
+      - method: DELETE
+        name: deleteobject
+        description: Google Cloud Storage Delete an object
+        call: google-cloud-storage.deleteobject
+        with:
+          bucket: rest.bucket
+          object: rest.object
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: google-cloud-storage-mcp
+    transport: http
+    description: MCP adapter for Google Cloud Storage JSON API for AI agent use.
+    tools:
+    - name: listbuckets
+      description: Google Cloud Storage List buckets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-cloud-storage.listbuckets
+      with:
+        project: tools.project
+        maxResults: tools.maxResults
+        pageToken: tools.pageToken
+        prefix: tools.prefix
+      inputParameters:
+      - name: project
+        type: string
+        description: A valid API project identifier.
+        required: true
+      - name: maxResults
+        type: integer
+        description: Maximum number of buckets to return.
+      - name: pageToken
+        type: string
+        description: A previously-returned page token for pagination.
+      - name: prefix
+        type: string
+        description: Filter results to buckets whose names begin with this prefix.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: insertbucket
+      description: Google Cloud Storage Create a bucket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-cloud-storage.insertbucket
+      with:
+        project: tools.project
+      inputParameters:
+      - name: project
+        type: string
+        description: A valid API project identifier.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getbucket
+      description: Google Cloud Storage Get a bucket
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-cloud-storage.getbucket
+      with:
+        bucket: tools.bucket
+      inputParameters:
+      - name: bucket
+        type: string
+        description: Name of the bucket.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatebucket
+      description: Google Cloud Storage Update a bucket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: google-cloud-storage.updatebucket
+      with:
+        bucket: tools.bucket
+      inputParameters:
+      - name: bucket
+        type: string
+        description: Name of the bucket.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletebucket
+      description: Google Cloud Storage Delete a bucket
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: google-cloud-storage.deletebucket
+      with:
+        bucket: tools.bucket
+      inputParameters:
+      - name: bucket
+        type: string
+        description: Name of the bucket.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listobjects
+      description: Google Cloud Storage List objects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-cloud-storage.listobjects
+      with:
+        bucket: tools.bucket
+        prefix: tools.prefix
+        delimiter: tools.delimiter
+        maxResults: tools.maxResults
+        pageToken: tools.pageToken
+      inputParameters:
+      - name: bucket
+        type: string
+        description: Name of the bucket.
+        required: true
+      - name: prefix
+        type: string
+        description: Filter results to objects whose names begin with this prefix.
+      - name: delimiter
+        type: string
+        description: Returns results in a directory-like mode.
+      - name: maxResults
+        type: integer
+        description: Maximum number of objects to return.
+      - name: pageToken
+        type: string
+        description: A previously-returned page token for pagination.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: insertobject
+      description: Google Cloud Storage Insert an object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-cloud-storage.insertobject
+      with:
+        bucket: tools.bucket
+        name: tools.name
+      inputParameters:
+      - name: bucket
+        type: string
+        description: Name of the bucket.
+        required: true
+      - name: name
+        type: string
+        description: Name of the object.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getobject
+      description: Google Cloud Storage Get an object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-cloud-storage.getobject
+      with:
+        bucket: tools.bucket
+        object: tools.object
+        alt: tools.alt
+      inputParameters:
+      - name: bucket
+        type: string
+        description: Name of the bucket.
+        required: true
+      - name: object
+        type: string
+        description: Name of the object.
+        required: true
+      - name: alt
+        type: string
+        description: Set to media to download object data. Default is json for metadata.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateobject
+      description: Google Cloud Storage Update an object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: google-cloud-storage.updateobject
+      with:
+        bucket: tools.bucket
+        object: tools.object
+      inputParameters:
+      - name: bucket
+        type: string
+        description: bucket
+        required: true
+      - name: object
+        type: string
+        description: object
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteobject
+      description: Google Cloud Storage Delete an object
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: google-cloud-storage.deleteobject
+      with:
+        bucket: tools.bucket
+        object: tools.object
+      inputParameters:
+      - name: bucket
+        type: string
+        description: bucket
+        required: true
+      - name: object
+        type: string
+        description: object
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    GOOGLE_CLOUD_STORAGE_TOKEN: GOOGLE_CLOUD_STORAGE_TOKEN
