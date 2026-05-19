@@ -1,0 +1,259 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Cloud Storage JSON API — Buckets
+  description: 'Google Cloud Storage JSON API — Buckets. 5 operations. Lead operation: Google Cloud Storage List buckets.
+    Self-contained Naftiko capability covering one Google Cloud Storage business surface.'
+  tags:
+  - Google Cloud Storage
+  - Buckets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_CLOUD_STORAGE_API_KEY: GOOGLE_CLOUD_STORAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-storage-buckets
+    baseUri: https://storage.googleapis.com/storage/v1
+    description: Google Cloud Storage JSON API — Buckets business capability. Self-contained, no shared references.
+    resources:
+    - name: b
+      path: /b
+      operations:
+      - name: listbuckets
+        method: GET
+        description: Google Cloud Storage List buckets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: A valid API project identifier.
+          required: true
+        - name: maxResults
+          in: query
+          type: integer
+          description: Maximum number of buckets to return.
+        - name: pageToken
+          in: query
+          type: string
+          description: A previously-returned page token for pagination.
+        - name: prefix
+          in: query
+          type: string
+          description: Filter results to buckets whose names begin with this prefix.
+      - name: insertbucket
+        method: POST
+        description: Google Cloud Storage Create a bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: A valid API project identifier.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: b-bucket
+      path: /b/{bucket}
+      operations:
+      - name: getbucket
+        method: GET
+        description: Google Cloud Storage Get a bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          description: Name of the bucket.
+          required: true
+      - name: updatebucket
+        method: PUT
+        description: Google Cloud Storage Update a bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          description: Name of the bucket.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletebucket
+        method: DELETE
+        description: Google Cloud Storage Delete a bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          description: Name of the bucket.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_CLOUD_STORAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-storage-buckets-rest
+    port: 8080
+    description: REST adapter for Google Cloud Storage JSON API — Buckets. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/b
+      name: b
+      description: REST surface for b.
+      operations:
+      - method: GET
+        name: listbuckets
+        description: Google Cloud Storage List buckets
+        call: cloud-storage-buckets.listbuckets
+        with:
+          project: rest.project
+          maxResults: rest.maxResults
+          pageToken: rest.pageToken
+          prefix: rest.prefix
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: insertbucket
+        description: Google Cloud Storage Create a bucket
+        call: cloud-storage-buckets.insertbucket
+        with:
+          project: rest.project
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/b/{bucket}
+      name: b-bucket
+      description: REST surface for b-bucket.
+      operations:
+      - method: GET
+        name: getbucket
+        description: Google Cloud Storage Get a bucket
+        call: cloud-storage-buckets.getbucket
+        with:
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatebucket
+        description: Google Cloud Storage Update a bucket
+        call: cloud-storage-buckets.updatebucket
+        with:
+          bucket: rest.bucket
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletebucket
+        description: Google Cloud Storage Delete a bucket
+        call: cloud-storage-buckets.deletebucket
+        with:
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-storage-buckets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Cloud Storage JSON API — Buckets. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: google-cloud-storage-list-buckets
+      description: Google Cloud Storage List buckets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-storage-buckets.listbuckets
+      with:
+        project: tools.project
+        maxResults: tools.maxResults
+        pageToken: tools.pageToken
+        prefix: tools.prefix
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-cloud-storage-create-bucket
+      description: Google Cloud Storage Create a bucket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-storage-buckets.insertbucket
+      with:
+        project: tools.project
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-cloud-storage-get-bucket
+      description: Google Cloud Storage Get a bucket
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-storage-buckets.getbucket
+      with:
+        bucket: tools.bucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-cloud-storage-update-bucket
+      description: Google Cloud Storage Update a bucket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-storage-buckets.updatebucket
+      with:
+        bucket: tools.bucket
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-cloud-storage-delete-bucket
+      description: Google Cloud Storage Delete a bucket
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-storage-buckets.deletebucket
+      with:
+        bucket: tools.bucket
+      outputParameters:
+      - type: object
+        mapping: $.

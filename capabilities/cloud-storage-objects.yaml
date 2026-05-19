@@ -1,0 +1,294 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Cloud Storage JSON API — Objects
+  description: 'Google Cloud Storage JSON API — Objects. 5 operations. Lead operation: Google Cloud Storage List objects.
+    Self-contained Naftiko capability covering one Google Cloud Storage business surface.'
+  tags:
+  - Google Cloud Storage
+  - Objects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_CLOUD_STORAGE_API_KEY: GOOGLE_CLOUD_STORAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-storage-objects
+    baseUri: https://storage.googleapis.com/storage/v1
+    description: Google Cloud Storage JSON API — Objects business capability. Self-contained, no shared references.
+    resources:
+    - name: b-bucket-o
+      path: /b/{bucket}/o
+      operations:
+      - name: listobjects
+        method: GET
+        description: Google Cloud Storage List objects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          description: Name of the bucket.
+          required: true
+        - name: prefix
+          in: query
+          type: string
+          description: Filter results to objects whose names begin with this prefix.
+        - name: delimiter
+          in: query
+          type: string
+          description: Returns results in a directory-like mode.
+        - name: maxResults
+          in: query
+          type: integer
+          description: Maximum number of objects to return.
+        - name: pageToken
+          in: query
+          type: string
+          description: A previously-returned page token for pagination.
+      - name: insertobject
+        method: POST
+        description: Google Cloud Storage Insert an object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          description: Name of the bucket.
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: Name of the object.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: b-bucket-o-object
+      path: /b/{bucket}/o/{object}
+      operations:
+      - name: getobject
+        method: GET
+        description: Google Cloud Storage Get an object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          description: Name of the bucket.
+          required: true
+        - name: object
+          in: path
+          type: string
+          description: Name of the object.
+          required: true
+        - name: alt
+          in: query
+          type: string
+          description: Set to media to download object data. Default is json for metadata.
+      - name: updateobject
+        method: PUT
+        description: Google Cloud Storage Update an object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+        - name: object
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteobject
+        method: DELETE
+        description: Google Cloud Storage Delete an object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          required: true
+        - name: object
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_CLOUD_STORAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-storage-objects-rest
+    port: 8080
+    description: REST adapter for Google Cloud Storage JSON API — Objects. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/b/{bucket}/o
+      name: b-bucket-o
+      description: REST surface for b-bucket-o.
+      operations:
+      - method: GET
+        name: listobjects
+        description: Google Cloud Storage List objects
+        call: cloud-storage-objects.listobjects
+        with:
+          bucket: rest.bucket
+          prefix: rest.prefix
+          delimiter: rest.delimiter
+          maxResults: rest.maxResults
+          pageToken: rest.pageToken
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: insertobject
+        description: Google Cloud Storage Insert an object
+        call: cloud-storage-objects.insertobject
+        with:
+          bucket: rest.bucket
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/b/{bucket}/o/{object}
+      name: b-bucket-o-object
+      description: REST surface for b-bucket-o-object.
+      operations:
+      - method: GET
+        name: getobject
+        description: Google Cloud Storage Get an object
+        call: cloud-storage-objects.getobject
+        with:
+          bucket: rest.bucket
+          object: rest.object
+          alt: rest.alt
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateobject
+        description: Google Cloud Storage Update an object
+        call: cloud-storage-objects.updateobject
+        with:
+          bucket: rest.bucket
+          object: rest.object
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteobject
+        description: Google Cloud Storage Delete an object
+        call: cloud-storage-objects.deleteobject
+        with:
+          bucket: rest.bucket
+          object: rest.object
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-storage-objects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Cloud Storage JSON API — Objects. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: google-cloud-storage-list-objects
+      description: Google Cloud Storage List objects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-storage-objects.listobjects
+      with:
+        bucket: tools.bucket
+        prefix: tools.prefix
+        delimiter: tools.delimiter
+        maxResults: tools.maxResults
+        pageToken: tools.pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-cloud-storage-insert-object
+      description: Google Cloud Storage Insert an object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-storage-objects.insertobject
+      with:
+        bucket: tools.bucket
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-cloud-storage-get-object
+      description: Google Cloud Storage Get an object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-storage-objects.getobject
+      with:
+        bucket: tools.bucket
+        object: tools.object
+        alt: tools.alt
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-cloud-storage-update-object
+      description: Google Cloud Storage Update an object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-storage-objects.updateobject
+      with:
+        bucket: tools.bucket
+        object: tools.object
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-cloud-storage-delete-object
+      description: Google Cloud Storage Delete an object
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-storage-objects.deleteobject
+      with:
+        bucket: tools.bucket
+        object: tools.object
+      outputParameters:
+      - type: object
+        mapping: $.
