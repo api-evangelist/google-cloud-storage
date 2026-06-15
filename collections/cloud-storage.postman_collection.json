@@ -1,0 +1,1878 @@
+{
+  "item": [
+    {
+      "id": "0524c82e-2df2-4bf6-9360-909b9fcd3a8d",
+      "name": "Buckets",
+      "description": {
+        "content": "Operations on Cloud Storage buckets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fcfb7a35-538f-4f2f-b0a5-3a35a1b099de",
+          "name": "Google Cloud Storage List buckets",
+          "request": {
+            "name": "Google Cloud Storage List buckets",
+            "description": {
+              "content": "Retrieves a list of buckets for a given project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "(Required) A valid API project identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "<integer>",
+                  "description": "Maximum number of buckets to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "A previously-returned page token for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefix",
+                  "value": "<string>",
+                  "description": "Filter results to buckets whose names begin with this prefix."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0f0acd46-ce81-428d-ba24-ded728fe6cb5",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"storage#buckets\",\n  \"items\": [\n    {\n      \"kind\": \"storage#bucket\",\n      \"id\": \"string\",\n      \"selfLink\": \"string\",\n      \"name\": \"string\",\n      \"projectNumber\": \"string\",\n      \"timeCreated\": \"2018-02-28T06:18:30.927Z\",\n      \"updated\": \"1948-12-31T13:31:44.157Z\",\n      \"location\": \"string\",\n      \"locationType\": \"string\",\n      \"storageClass\": \"COLDLINE\",\n      \"versioning\": {\n        \"enabled\": false\n      },\n      \"labels\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"lifecycle\": {\n        \"rule\": [\n          {\n            \"action\": {\n              \"type\": \"string\",\n              \"storageClass\": \"string\"\n            },\n            \"condition\": {\n              \"age\": 1319,\n              \"isLive\": true,\n              \"numNewerVersions\": 4848\n            }\n          },\n          {\n            \"action\": {\n              \"type\": \"string\",\n              \"storageClass\": \"string\"\n            },\n            \"condition\": {\n              \"age\": 3391,\n              \"isLive\": true,\n              \"numNewerVersions\": 4231\n            }\n          }\n        ]\n      },\n      \"encryption\": {\n        \"defaultKmsKeyName\": \"string\"\n      },\n      \"iamConfiguration\": {\n        \"uniformBucketLevelAccess\": {\n          \"enabled\": true,\n          \"lockedTime\": \"1977-02-12T08:51:14.073Z\"\n        }\n      }\n    },\n    {\n      \"kind\": \"storage#bucket\",\n      \"id\": \"string\",\n      \"selfLink\": \"string\",\n      \"name\": \"string\",\n      \"projectNumber\": \"string\",\n      \"timeCreated\": \"2017-11-08T10:15:09.511Z\",\n      \"updated\": \"1993-06-29T09:40:57.210Z\",\n      \"location\": \"string\",\n      \"locationType\": \"string\",\n      \"storageClass\": \"STANDARD\",\n      \"versioning\": {\n        \"enabled\": true\n      },\n      \"labels\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"lifecycle\": {\n        \"rule\": [\n          {\n            \"action\": {\n              \"type\": \"string\",\n              \"storageClass\": \"string\"\n            },\n            \"condition\": {\n              \"age\": 7934,\n              \"isLive\": false,\n              \"numNewerVersions\": 8489\n            }\n          },\n          {\n            \"action\": {\n              \"type\": \"string\",\n              \"storageClass\": \"string\"\n            },\n            \"condition\": {\n              \"age\": 3936,\n              \"isLive\": false,\n              \"numNewerVersions\": 6814\n            }\n          }\n        ]\n      },\n      \"encryption\": {\n        \"defaultKmsKeyName\": \"string\"\n      },\n      \"iamConfiguration\": {\n        \"uniformBucketLevelAccess\": {\n          \"enabled\": false,\n          \"lockedTime\": \"2016-04-28T11:23:58.908Z\"\n        }\n      }\n    }\n  ],\n  \"nextPageToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "283c0555-5a54-471f-839b-eab5e9d0de2c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0bf0c2d4-4466-4442-a7b4-6e30a214213c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06d39a93-0e86-4099-b04d-49b69c630021",
+          "name": "Google Cloud Storage Create a bucket",
+          "request": {
+            "name": "Google Cloud Storage Create a bucket",
+            "description": {
+              "content": "Creates a new bucket in the specified project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "(Required) A valid API project identifier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"storage#bucket\",\n  \"id\": \"<string>\",\n  \"selfLink\": \"<string>\",\n  \"name\": \"<string>\",\n  \"projectNumber\": \"<string>\",\n  \"timeCreated\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"locationType\": \"<string>\",\n  \"storageClass\": \"<string>\",\n  \"versioning\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      },\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      }\n    ]\n  },\n  \"encryption\": {\n    \"defaultKmsKeyName\": \"<string>\"\n  },\n  \"iamConfiguration\": {\n    \"uniformBucketLevelAccess\": {\n      \"enabled\": \"<boolean>\",\n      \"lockedTime\": \"<dateTime>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4915a244-7494-47ee-86c0-1c8280f55fe1",
+              "name": "Bucket created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"storage#bucket\",\n  \"id\": \"<string>\",\n  \"selfLink\": \"<string>\",\n  \"name\": \"<string>\",\n  \"projectNumber\": \"<string>\",\n  \"timeCreated\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"locationType\": \"<string>\",\n  \"storageClass\": \"<string>\",\n  \"versioning\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      },\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      }\n    ]\n  },\n  \"encryption\": {\n    \"defaultKmsKeyName\": \"<string>\"\n  },\n  \"iamConfiguration\": {\n    \"uniformBucketLevelAccess\": {\n      \"enabled\": \"<boolean>\",\n      \"lockedTime\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"storage#bucket\",\n  \"id\": \"string\",\n  \"selfLink\": \"string\",\n  \"name\": \"string\",\n  \"projectNumber\": \"string\",\n  \"timeCreated\": \"1988-01-09T04:01:39.543Z\",\n  \"updated\": \"1974-09-27T12:17:39.948Z\",\n  \"location\": \"string\",\n  \"locationType\": \"string\",\n  \"storageClass\": \"ARCHIVE\",\n  \"versioning\": {\n    \"enabled\": false\n  },\n  \"labels\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\",\n    \"key_4\": \"string\"\n  },\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\n          \"type\": \"string\",\n          \"storageClass\": \"string\"\n        },\n        \"condition\": {\n          \"age\": 3885,\n          \"isLive\": true,\n          \"numNewerVersions\": 8186\n        }\n      },\n      {\n        \"action\": {\n          \"type\": \"string\",\n          \"storageClass\": \"string\"\n        },\n        \"condition\": {\n          \"age\": 36,\n          \"isLive\": false,\n          \"numNewerVersions\": 4191\n        }\n      }\n    ]\n  },\n  \"encryption\": {\n    \"defaultKmsKeyName\": \"string\"\n  },\n  \"iamConfiguration\": {\n    \"uniformBucketLevelAccess\": {\n      \"enabled\": false,\n      \"lockedTime\": \"1960-01-30T19:59:21.055Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e741c8d-4edf-4be9-8e37-ce1fbf3e97dd",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"storage#bucket\",\n  \"id\": \"<string>\",\n  \"selfLink\": \"<string>\",\n  \"name\": \"<string>\",\n  \"projectNumber\": \"<string>\",\n  \"timeCreated\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"locationType\": \"<string>\",\n  \"storageClass\": \"<string>\",\n  \"versioning\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      },\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      }\n    ]\n  },\n  \"encryption\": {\n    \"defaultKmsKeyName\": \"<string>\"\n  },\n  \"iamConfiguration\": {\n    \"uniformBucketLevelAccess\": {\n      \"enabled\": \"<boolean>\",\n      \"lockedTime\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9900d983-7821-4ef5-b7ed-f47d8be6bd68",
+              "name": "Conflict - bucket already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"storage#bucket\",\n  \"id\": \"<string>\",\n  \"selfLink\": \"<string>\",\n  \"name\": \"<string>\",\n  \"projectNumber\": \"<string>\",\n  \"timeCreated\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"locationType\": \"<string>\",\n  \"storageClass\": \"<string>\",\n  \"versioning\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      },\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      }\n    ]\n  },\n  \"encryption\": {\n    \"defaultKmsKeyName\": \"<string>\"\n  },\n  \"iamConfiguration\": {\n    \"uniformBucketLevelAccess\": {\n      \"enabled\": \"<boolean>\",\n      \"lockedTime\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49270f74-d160-415c-8f71-aed7a8e70ecf",
+          "name": "Google Cloud Storage Get a bucket",
+          "request": {
+            "name": "Google Cloud Storage Get a bucket",
+            "description": {
+              "content": "Returns metadata for the specified bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b",
+                ":bucket"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bucket",
+                  "description": "(Required) Name of the bucket."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9742d2fa-4f13-4771-879b-845d4ab36c75",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"storage#bucket\",\n  \"id\": \"string\",\n  \"selfLink\": \"string\",\n  \"name\": \"string\",\n  \"projectNumber\": \"string\",\n  \"timeCreated\": \"1988-01-09T04:01:39.543Z\",\n  \"updated\": \"1974-09-27T12:17:39.948Z\",\n  \"location\": \"string\",\n  \"locationType\": \"string\",\n  \"storageClass\": \"ARCHIVE\",\n  \"versioning\": {\n    \"enabled\": false\n  },\n  \"labels\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\",\n    \"key_4\": \"string\"\n  },\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\n          \"type\": \"string\",\n          \"storageClass\": \"string\"\n        },\n        \"condition\": {\n          \"age\": 3885,\n          \"isLive\": true,\n          \"numNewerVersions\": 8186\n        }\n      },\n      {\n        \"action\": {\n          \"type\": \"string\",\n          \"storageClass\": \"string\"\n        },\n        \"condition\": {\n          \"age\": 36,\n          \"isLive\": false,\n          \"numNewerVersions\": 4191\n        }\n      }\n    ]\n  },\n  \"encryption\": {\n    \"defaultKmsKeyName\": \"string\"\n  },\n  \"iamConfiguration\": {\n    \"uniformBucketLevelAccess\": {\n      \"enabled\": false,\n      \"lockedTime\": \"1960-01-30T19:59:21.055Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20a37c58-fcd4-4abe-8716-73e677eedb0e",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc2b95f9-28d7-4a94-8530-7eae7f77d182",
+          "name": "Google Cloud Storage Update a bucket",
+          "request": {
+            "name": "Google Cloud Storage Update a bucket",
+            "description": {
+              "content": "Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b",
+                ":bucket"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bucket",
+                  "description": "(Required) Name of the bucket."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"storage#bucket\",\n  \"id\": \"<string>\",\n  \"selfLink\": \"<string>\",\n  \"name\": \"<string>\",\n  \"projectNumber\": \"<string>\",\n  \"timeCreated\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"locationType\": \"<string>\",\n  \"storageClass\": \"<string>\",\n  \"versioning\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      },\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      }\n    ]\n  },\n  \"encryption\": {\n    \"defaultKmsKeyName\": \"<string>\"\n  },\n  \"iamConfiguration\": {\n    \"uniformBucketLevelAccess\": {\n      \"enabled\": \"<boolean>\",\n      \"lockedTime\": \"<dateTime>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "29bd51af-67a7-43c3-bdf4-d7636bbf89e9",
+              "name": "Bucket updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"storage#bucket\",\n  \"id\": \"<string>\",\n  \"selfLink\": \"<string>\",\n  \"name\": \"<string>\",\n  \"projectNumber\": \"<string>\",\n  \"timeCreated\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"locationType\": \"<string>\",\n  \"storageClass\": \"<string>\",\n  \"versioning\": {\n    \"enabled\": \"<boolean>\"\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      },\n      {\n        \"action\": {\n          \"type\": \"<string>\",\n          \"storageClass\": \"<string>\"\n        },\n        \"condition\": {\n          \"age\": \"<integer>\",\n          \"isLive\": \"<boolean>\",\n          \"numNewerVersions\": \"<integer>\"\n        }\n      }\n    ]\n  },\n  \"encryption\": {\n    \"defaultKmsKeyName\": \"<string>\"\n  },\n  \"iamConfiguration\": {\n    \"uniformBucketLevelAccess\": {\n      \"enabled\": \"<boolean>\",\n      \"lockedTime\": \"<dateTime>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"storage#bucket\",\n  \"id\": \"string\",\n  \"selfLink\": \"string\",\n  \"name\": \"string\",\n  \"projectNumber\": \"string\",\n  \"timeCreated\": \"1988-01-09T04:01:39.543Z\",\n  \"updated\": \"1974-09-27T12:17:39.948Z\",\n  \"location\": \"string\",\n  \"locationType\": \"string\",\n  \"storageClass\": \"ARCHIVE\",\n  \"versioning\": {\n    \"enabled\": false\n  },\n  \"labels\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\",\n    \"key_4\": \"string\"\n  },\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\n          \"type\": \"string\",\n          \"storageClass\": \"string\"\n        },\n        \"condition\": {\n          \"age\": 3885,\n          \"isLive\": true,\n          \"numNewerVersions\": 8186\n        }\n      },\n      {\n        \"action\": {\n          \"type\": \"string\",\n          \"storageClass\": \"string\"\n        },\n        \"condition\": {\n          \"age\": 36,\n          \"isLive\": false,\n          \"numNewerVersions\": 4191\n        }\n      }\n    ]\n  },\n  \"encryption\": {\n    \"defaultKmsKeyName\": \"string\"\n  },\n  \"iamConfiguration\": {\n    \"uniformBucketLevelAccess\": {\n      \"enabled\": false,\n      \"lockedTime\": \"1960-01-30T19:59:21.055Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa236dce-bd1d-45a4-83ef-d7a9389577e7",
+          "name": "Google Cloud Storage Delete a bucket",
+          "request": {
+            "name": "Google Cloud Storage Delete a bucket",
+            "description": {
+              "content": "Permanently deletes an empty bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b",
+                ":bucket"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bucket",
+                  "description": "(Required) Name of the bucket."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "882106dd-94fa-4fa8-afc7-ac48d96c703c",
+              "name": "Bucket deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5d13ab92-1571-439f-bb30-eaf199770cbd",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c603ce3-0289-4452-a71d-000bec2ade07",
+              "name": "Conflict - bucket is not empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f76fd1dd-5238-43b5-8cea-56d459641db4",
+      "name": "Objects",
+      "description": {
+        "content": "Operations on Cloud Storage objects",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f73f6bcd-bfa6-449e-a50a-81b9126a5ddc",
+          "name": "Google Cloud Storage List objects",
+          "request": {
+            "name": "Google Cloud Storage List objects",
+            "description": {
+              "content": "Retrieves a list of objects matching the criteria in the specified bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b",
+                ":bucket",
+                "o"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "prefix",
+                  "value": "<string>",
+                  "description": "Filter results to objects whose names begin with this prefix."
+                },
+                {
+                  "disabled": false,
+                  "key": "delimiter",
+                  "value": "<string>",
+                  "description": "Returns results in a directory-like mode."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "<integer>",
+                  "description": "Maximum number of objects to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "A previously-returned page token for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bucket",
+                  "description": "(Required) Name of the bucket."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e13ccb51-d324-4979-b565-cb4bda98d2ea",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket",
+                    "o"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delimiter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"storage#objects\",\n  \"items\": [\n    {\n      \"kind\": \"storage#object\",\n      \"id\": \"string\",\n      \"selfLink\": \"string\",\n      \"name\": \"string\",\n      \"bucket\": \"string\",\n      \"generation\": \"string\",\n      \"metageneration\": \"string\",\n      \"contentType\": \"string\",\n      \"timeCreated\": \"1969-09-13T10:05:56.906Z\",\n      \"updated\": \"2018-04-25T11:43:18.148Z\",\n      \"size\": \"string\",\n      \"md5Hash\": \"string\",\n      \"crc32c\": \"string\",\n      \"etag\": \"string\",\n      \"storageClass\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"kind\": \"storage#object\",\n      \"id\": \"string\",\n      \"selfLink\": \"string\",\n      \"name\": \"string\",\n      \"bucket\": \"string\",\n      \"generation\": \"string\",\n      \"metageneration\": \"string\",\n      \"contentType\": \"string\",\n      \"timeCreated\": \"1989-08-07T10:48:26.923Z\",\n      \"updated\": \"1949-03-16T16:59:47.067Z\",\n      \"size\": \"string\",\n      \"md5Hash\": \"string\",\n      \"crc32c\": \"string\",\n      \"etag\": \"string\",\n      \"storageClass\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  ],\n  \"prefixes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"nextPageToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d479c964-189c-4099-a81d-0897c5568c64",
+          "name": "Google Cloud Storage Insert an object",
+          "request": {
+            "name": "Google Cloud Storage Insert an object",
+            "description": {
+              "content": "Stores a new object and metadata. For tips on uploading to Cloud Storage, see best practices.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b",
+                ":bucket",
+                "o"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the object."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bucket",
+                  "description": "(Required) Name of the bucket."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            }
+          },
+          "response": [
+            {
+              "id": "ba683803-8768-412c-8245-2958a657c558",
+              "name": "Object created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket",
+                    "o"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"storage#object\",\n  \"id\": \"string\",\n  \"selfLink\": \"string\",\n  \"name\": \"string\",\n  \"bucket\": \"string\",\n  \"generation\": \"string\",\n  \"metageneration\": \"string\",\n  \"contentType\": \"string\",\n  \"timeCreated\": \"1995-01-30T23:51:19.654Z\",\n  \"updated\": \"1988-11-15T11:28:39.934Z\",\n  \"size\": \"string\",\n  \"md5Hash\": \"string\",\n  \"crc32c\": \"string\",\n  \"etag\": \"string\",\n  \"storageClass\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa64fb03-4eb2-4201-b31e-9143fb345bb3",
+          "name": "Google Cloud Storage Get an object",
+          "request": {
+            "name": "Google Cloud Storage Get an object",
+            "description": {
+              "content": "Retrieves an object or its metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b",
+                ":bucket",
+                "o",
+                ":object"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "alt",
+                  "value": "<string>",
+                  "description": "Set to media to download object data. Default is json for metadata."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bucket",
+                  "description": "(Required) Name of the bucket."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object",
+                  "description": "(Required) Name of the object."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a68ef50-a529-4c51-8a93-4addfdd72400",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket",
+                    "o",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) Name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"storage#object\",\n  \"id\": \"string\",\n  \"selfLink\": \"string\",\n  \"name\": \"string\",\n  \"bucket\": \"string\",\n  \"generation\": \"string\",\n  \"metageneration\": \"string\",\n  \"contentType\": \"string\",\n  \"timeCreated\": \"1995-01-30T23:51:19.654Z\",\n  \"updated\": \"1988-11-15T11:28:39.934Z\",\n  \"size\": \"string\",\n  \"md5Hash\": \"string\",\n  \"crc32c\": \"string\",\n  \"etag\": \"string\",\n  \"storageClass\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f7ff1c6-d776-48a6-bc8c-3314867fc7ce",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket",
+                    "o",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) Name of the bucket."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) Name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "964a4a39-582a-4991-92fc-8542c8badfb7",
+          "name": "Google Cloud Storage Update an object",
+          "request": {
+            "name": "Google Cloud Storage Update an object",
+            "description": {
+              "content": "Updates an object's metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b",
+                ":bucket",
+                "o",
+                ":object"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bucket",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"storage#object\",\n  \"id\": \"<string>\",\n  \"selfLink\": \"<string>\",\n  \"name\": \"<string>\",\n  \"bucket\": \"<string>\",\n  \"generation\": \"<string>\",\n  \"metageneration\": \"<string>\",\n  \"contentType\": \"<string>\",\n  \"timeCreated\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"md5Hash\": \"<string>\",\n  \"crc32c\": \"<string>\",\n  \"etag\": \"<string>\",\n  \"storageClass\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbbad7fa-dc47-4aca-8aca-ea7c7453e1aa",
+              "name": "Object updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket",
+                    "o",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"storage#object\",\n  \"id\": \"<string>\",\n  \"selfLink\": \"<string>\",\n  \"name\": \"<string>\",\n  \"bucket\": \"<string>\",\n  \"generation\": \"<string>\",\n  \"metageneration\": \"<string>\",\n  \"contentType\": \"<string>\",\n  \"timeCreated\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"size\": \"<string>\",\n  \"md5Hash\": \"<string>\",\n  \"crc32c\": \"<string>\",\n  \"etag\": \"<string>\",\n  \"storageClass\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"storage#object\",\n  \"id\": \"string\",\n  \"selfLink\": \"string\",\n  \"name\": \"string\",\n  \"bucket\": \"string\",\n  \"generation\": \"string\",\n  \"metageneration\": \"string\",\n  \"contentType\": \"string\",\n  \"timeCreated\": \"1995-01-30T23:51:19.654Z\",\n  \"updated\": \"1988-11-15T11:28:39.934Z\",\n  \"size\": \"string\",\n  \"md5Hash\": \"string\",\n  \"crc32c\": \"string\",\n  \"etag\": \"string\",\n  \"storageClass\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "446c698d-5c94-4dec-876f-1a7159a5b247",
+          "name": "Google Cloud Storage Delete an object",
+          "request": {
+            "name": "Google Cloud Storage Delete an object",
+            "description": {
+              "content": "Deletes an object and its metadata. Deletions are permanent if versioning is not enabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "b",
+                ":bucket",
+                "o",
+                ":object"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bucket",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/devstorage.read_only https://www.googleapis.com/auth/devstorage.read_write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth2.googleapis.com/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://accounts.google.com/o/oauth2/auth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "06fc5d58-acf2-49ca-b419-cf4ec5bd8c68",
+              "name": "Object deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket",
+                    "o",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0f1b59e8-24eb-4d48-b496-6f91cf636980",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "b",
+                    ":bucket",
+                    "o",
+                    ":object"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bucket",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://storage.googleapis.com/storage/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3ff894e5-e592-4913-95a0-c72b2b0a53c1",
+    "name": "Google Cloud Storage JSON API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Google Cloud Storage JSON API allows applications to store and retrieve data on Google's infrastructure. It provides RESTful access to Cloud Storage buckets and objects, supporting upload, download, metadata management, and access control operations.\n\nContact Support:\n Name: Google Cloud",
+      "type": "text/plain"
+    }
+  }
+}
