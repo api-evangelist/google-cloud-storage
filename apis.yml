@@ -42,6 +42,8 @@ apis:
       - type: JSONSchema
         url: json-schema/bucket-schema.json
 common:
+  - type: OAuthScopes
+    url: scopes/google-cloud-storage-scopes.yml
   - type: GitHubOrganization
     url: https://github.com/GoogleCloudPlatform
   - type: Portal

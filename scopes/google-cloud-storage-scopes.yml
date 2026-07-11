@@ -1,0 +1,35 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/cloud-storage-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/cloud-storage-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+scopes:
+- scope: https://www.googleapis.com/auth/cloud-platform
+  description: Full access to Cloud Platform
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/cloud-storage-openapi.yml
+- scope: https://www.googleapis.com/auth/devstorage.full_control
+  description: Full control of Cloud Storage
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/cloud-storage-openapi.yml
+- scope: https://www.googleapis.com/auth/devstorage.read_only
+  description: Read-only access to Cloud Storage
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/cloud-storage-openapi.yml
+- scope: https://www.googleapis.com/auth/devstorage.read_write
+  description: Read-write access to Cloud Storage
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/cloud-storage-openapi.yml
