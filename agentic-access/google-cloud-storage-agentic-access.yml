@@ -1,0 +1,182 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/cloud-storage-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 10
+  by_action_class:
+    connected: 4
+    acting: 6
+  by_consequence:
+    read: 4
+    write: 6
+  human_in_the_loop_required: 0
+operations:
+- path: /b
+  method: get
+  operationId: listBuckets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.read_only
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /b
+  method: post
+  operationId: insertBucket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.read_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /b/{bucket}
+  method: get
+  operationId: getBucket
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.read_only
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /b/{bucket}
+  method: put
+  operationId: updateBucket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.full_control
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /b/{bucket}
+  method: delete
+  operationId: deleteBucket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.full_control
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /b/{bucket}/o
+  method: get
+  operationId: listObjects
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.read_only
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /b/{bucket}/o
+  method: post
+  operationId: insertObject
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.read_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /b/{bucket}/o/{object}
+  method: get
+  operationId: getObject
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.read_only
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /b/{bucket}/o/{object}
+  method: put
+  operationId: updateObject
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.full_control
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /b/{bucket}/o/{object}
+  method: delete
+  operationId: deleteObject
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/devstorage.full_control
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
