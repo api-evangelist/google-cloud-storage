@@ -1,0 +1,273 @@
+openapi: 3.1.0
+info:
+  title: Google Cloud Storage JSON Buckets Objects API
+  description: The Google Cloud Storage JSON API allows applications to store and retrieve data on Google's infrastructure. It provides RESTful access to Cloud Storage buckets and objects, supporting upload, download, metadata management, and access control operations.
+  version: v1
+  contact:
+    name: Google Cloud
+    url: https://cloud.google.com/storage/docs/json_api
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://storage.googleapis.com/storage/v1
+  description: Google Cloud Storage JSON API v1
+tags:
+- name: Objects
+  description: Operations on Cloud Storage objects
+paths:
+  /b/{bucket}/o:
+    get:
+      tags:
+      - Objects
+      summary: Google Cloud Storage List objects
+      description: Retrieves a list of objects matching the criteria in the specified bucket.
+      operationId: listObjects
+      parameters:
+      - name: bucket
+        in: path
+        required: true
+        description: Name of the bucket.
+        schema:
+          type: string
+      - name: prefix
+        in: query
+        description: Filter results to objects whose names begin with this prefix.
+        schema:
+          type: string
+      - name: delimiter
+        in: query
+        description: Returns results in a directory-like mode.
+        schema:
+          type: string
+      - name: maxResults
+        in: query
+        description: Maximum number of objects to return.
+        schema:
+          type: integer
+      - name: pageToken
+        in: query
+        description: A previously-returned page token for pagination.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectList'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/devstorage.read_only
+    post:
+      tags:
+      - Objects
+      summary: Google Cloud Storage Insert an object
+      description: Stores a new object and metadata. For tips on uploading to Cloud Storage, see best practices.
+      operationId: insertObject
+      parameters:
+      - name: bucket
+        in: path
+        required: true
+        description: Name of the bucket.
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Name of the object.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Object created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/devstorage.read_write
+  /b/{bucket}/o/{object}:
+    get:
+      tags:
+      - Objects
+      summary: Google Cloud Storage Get an object
+      description: Retrieves an object or its metadata.
+      operationId: getObject
+      parameters:
+      - name: bucket
+        in: path
+        required: true
+        description: Name of the bucket.
+        schema:
+          type: string
+      - name: object
+        in: path
+        required: true
+        description: Name of the object.
+        schema:
+          type: string
+      - name: alt
+        in: query
+        description: Set to media to download object data. Default is json for metadata.
+        schema:
+          type: string
+          enum:
+          - json
+          - media
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '404':
+          description: Not found
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/devstorage.read_only
+    put:
+      tags:
+      - Objects
+      summary: Google Cloud Storage Update an object
+      description: Updates an object's metadata.
+      operationId: updateObject
+      parameters:
+      - name: bucket
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: object
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Object'
+      responses:
+        '200':
+          description: Object updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/devstorage.full_control
+    delete:
+      tags:
+      - Objects
+      summary: Google Cloud Storage Delete an object
+      description: Deletes an object and its metadata. Deletions are permanent if versioning is not enabled.
+      operationId: deleteObject
+      parameters:
+      - name: bucket
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: object
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Object deleted successfully
+        '404':
+          description: Not found
+      security:
+      - oauth2:
+        - https://www.googleapis.com/auth/cloud-platform
+        - https://www.googleapis.com/auth/devstorage.full_control
+components:
+  schemas:
+    Object:
+      type: object
+      properties:
+        kind:
+          type: string
+          default: storage#object
+        id:
+          type: string
+        selfLink:
+          type: string
+        name:
+          type: string
+          description: The name of the object.
+        bucket:
+          type: string
+          description: The name of the bucket containing the object.
+        generation:
+          type: string
+        metageneration:
+          type: string
+        contentType:
+          type: string
+          description: Content-Type of the object data.
+        timeCreated:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        size:
+          type: string
+          description: Content-Length of the data in bytes.
+        md5Hash:
+          type: string
+        crc32c:
+          type: string
+        etag:
+          type: string
+        storageClass:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    ObjectList:
+      type: object
+      properties:
+        kind:
+          type: string
+          default: storage#objects
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Object'
+        prefixes:
+          type: array
+          items:
+            type: string
+        nextPageToken:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: Full access to Cloud Platform
+            https://www.googleapis.com/auth/devstorage.full_control: Full control of Cloud Storage
+            https://www.googleapis.com/auth/devstorage.read_only: Read-only access to Cloud Storage
+            https://www.googleapis.com/auth/devstorage.read_write: Read-write access to Cloud Storage
