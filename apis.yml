@@ -4,7 +4,20 @@ description: >-
   Google Cloud Storage is a managed service for storing unstructured data such as images, videos, backups, and other
   binary or text objects. It provides a single API for accessing both simple storage and highly available, globally
   redundant storage, with automatic data encryption, built-in redundancy, and fine-grained access controls.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/google-cloud-storage.png
 url: https://raw.githubusercontent.com/api-evangelist/google-cloud-storage/refs/heads/main/apis.yml
 created: '2026-03-13'
 modified: '2026-05-19'
@@ -17,30 +30,42 @@ tags:
   - Objects
   - Storage
 apis:
-  - name: Cloud Storage JSON API
-    description: >-
-      The Cloud Storage JSON API is a RESTful interface for managing data in Google Cloud Storage. It allows you to
-      create and manage buckets, upload and download objects, manage access controls, and configure lifecycle policies.
-      The API supports resumable uploads, object versioning, and customer-managed encryption keys for comprehensive
-      cloud storage management.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://cloud.google.com/storage/docs
-    baseURL: https://storage.googleapis.com/storage/v1
-    tags:
-      - Buckets
-      - Objects
-      - Storage
-    properties:
-      - type: Documentation
-        url: https://cloud.google.com/storage/docs/json_api
-      - type: OpenAPI
-        url: openapi/cloud-storage-openapi.yml
-      - type: Authentication
-        url: https://cloud.google.com/storage/docs/authentication
-      - type: GettingStarted
-        url: https://cloud.google.com/storage/docs/quickstarts
-      - type: JSONSchema
-        url: json-schema/bucket-schema.json
+- aid: google-cloud-storage:google-cloud-storage-buckets-api
+  name: Google Cloud Storage Buckets API
+  description: Operations on Cloud Storage buckets
+  humanURL: https://cloud.google.com/storage/docs
+  baseURL: https://storage.googleapis.com/storage/v1
+  tags:
+  - Buckets
+  properties:
+  - type: OpenAPI
+    url: openapi/google-cloud-storage-buckets-api-openapi.yml
+  - type: Documentation
+    url: https://cloud.google.com/storage/docs/json_api
+  - type: Authentication
+    url: https://cloud.google.com/storage/docs/authentication
+  - type: GettingStarted
+    url: https://cloud.google.com/storage/docs/quickstarts
+  - type: JSONSchema
+    url: json-schema/bucket-schema.json
+- aid: google-cloud-storage:google-cloud-storage-objects-api
+  name: Google Cloud Storage Objects API
+  description: Operations on Cloud Storage objects
+  humanURL: https://cloud.google.com/storage/docs
+  baseURL: https://storage.googleapis.com/storage/v1
+  tags:
+  - Objects
+  properties:
+  - type: OpenAPI
+    url: openapi/google-cloud-storage-objects-api-openapi.yml
+  - type: Documentation
+    url: https://cloud.google.com/storage/docs/json_api
+  - type: Authentication
+    url: https://cloud.google.com/storage/docs/authentication
+  - type: GettingStarted
+    url: https://cloud.google.com/storage/docs/quickstarts
+  - type: JSONSchema
+    url: json-schema/bucket-schema.json
 common:
   - type: AgenticAccess
     url: agentic-access/google-cloud-storage-agentic-access.yml
