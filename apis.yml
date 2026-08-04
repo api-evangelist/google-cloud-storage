@@ -67,6 +67,8 @@ apis:
   - type: JSONSchema
     url: json-schema/bucket-schema.json
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/google-cloud-storage/overview
   - type: AgenticAccess
     url: agentic-access/google-cloud-storage-agentic-access.yml
   - type: VulnerabilityDisclosure

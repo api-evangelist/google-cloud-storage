@@ -1,0 +1,16 @@
+{
+  "provider": "google-cloud-storage",
+  "sources": [
+    "google-cloud-storage-buckets-api-openapi.yml",
+    "google-cloud-storage-objects-api-openapi.yml"
+  ],
+  "outputs": [
+    "google-cloud-storage-buckets-api-openapi.yml",
+    "google-cloud-storage-objects-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
