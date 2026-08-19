@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Cloud Storage JSON Buckets Objects API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Objects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Cloud Storage List objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://storage.googleapis.com/storage/v1/b/:bucket/o",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "Name of the bucket."
+              },
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to objects whose names begin with this prefix."
+              },
+              {
+                "name": "delimiter",
+                "value": "",
+                "type": "query",
+                "description": "Returns results in a directory-like mode."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects to return."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "A previously-returned page token for pagination."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+              "accessTokenUrl": "https://oauth2.googleapis.com/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a list of objects matching the criteria in the specified bucket."
+        },
+        {
+          "info": {
+            "name": "Google Cloud Storage Insert an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://storage.googleapis.com/storage/v1/b/:bucket/o",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "Name of the bucket."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the object."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+              "accessTokenUrl": "https://oauth2.googleapis.com/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Stores a new object and metadata. For tips on uploading to Cloud Storage, see best practices."
+        },
+        {
+          "info": {
+            "name": "Google Cloud Storage Get an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://storage.googleapis.com/storage/v1/b/:bucket/o/:object",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "Name of the bucket."
+              },
+              {
+                "name": "object",
+                "value": "",
+                "type": "path",
+                "description": "Name of the object."
+              },
+              {
+                "name": "alt",
+                "value": "",
+                "type": "query",
+                "description": "Set to media to download object data. Default is json for metadata."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+              "accessTokenUrl": "https://oauth2.googleapis.com/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves an object or its metadata."
+        },
+        {
+          "info": {
+            "name": "Google Cloud Storage Update an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://storage.googleapis.com/storage/v1/b/:bucket/o/:object",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "object",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+              "accessTokenUrl": "https://oauth2.googleapis.com/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates an object's metadata."
+        },
+        {
+          "info": {
+            "name": "Google Cloud Storage Delete an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://storage.googleapis.com/storage/v1/b/:bucket/o/:object",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "object",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+              "accessTokenUrl": "https://oauth2.googleapis.com/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Deletes an object and its metadata. Deletions are permanent if versioning is not enabled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
