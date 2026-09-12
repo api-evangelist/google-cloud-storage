@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Google Cloud Storage JSON Buckets Objects API
   description: The Google Cloud Storage JSON API allows applications to store and retrieve data on Google's infrastructure. It provides RESTful access to Cloud Storage buckets and objects, supporting upload, download, metadata management, and access control operations.
@@ -199,6 +199,22 @@ paths:
         - https://www.googleapis.com/auth/devstorage.full_control
 components:
   schemas:
+    ObjectList:
+      type: object
+      properties:
+        kind:
+          type: string
+          default: storage#objects
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Object'
+        prefixes:
+          type: array
+          items:
+            type: string
+        nextPageToken:
+          type: string
     Object:
       type: object
       properties:
@@ -243,22 +259,6 @@ components:
           type: object
           additionalProperties:
             type: string
-    ObjectList:
-      type: object
-      properties:
-        kind:
-          type: string
-          default: storage#objects
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Object'
-        prefixes:
-          type: array
-          items:
-            type: string
-        nextPageToken:
-          type: string
   securitySchemes:
     oauth2:
       type: oauth2
