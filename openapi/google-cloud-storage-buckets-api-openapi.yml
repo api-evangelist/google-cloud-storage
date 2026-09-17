@@ -177,6 +177,18 @@ paths:
         - https://www.googleapis.com/auth/devstorage.full_control
 components:
   schemas:
+    BucketList:
+      type: object
+      properties:
+        kind:
+          type: string
+          default: storage#buckets
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bucket'
+        nextPageToken:
+          type: string
     Bucket:
       type: object
       properties:
@@ -271,18 +283,6 @@ components:
                 lockedTime:
                   type: string
                   format: date-time
-    BucketList:
-      type: object
-      properties:
-        kind:
-          type: string
-          default: storage#buckets
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Bucket'
-        nextPageToken:
-          type: string
   securitySchemes:
     oauth2:
       type: oauth2
